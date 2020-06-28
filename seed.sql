@@ -16,7 +16,9 @@ VALUES
 INSERT INTO employee
     (first_name, last_name, role_id, manager_id)
 VALUES
-    ("Scott", "Glover", 1, 1);
+    ("Scott", "Glover", 1, 1),
+    ("Ronald", "McDonald", 1, 1),
+    ("Vanessa", "Glover", 1, 1);
 
 SELECT *
 FROM department;
