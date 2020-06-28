@@ -109,6 +109,47 @@ function viewAllRole() {
     })
 };
 
+// delete employees
+// connection.query("SELECT * FROM employee", function (err, results) {
+//     if (err) throw err;
+//     inquirer.prompt([
+//         {
+//             name: "choice",
+//             type: "list",
+//             choices: function () {
+//                 var empChoice = [];
+//                 for (var i = 0; i < results.length; i++) {
+//                     console.table(results[i]);
+//                     empChoice.push(results[i].first_name);
+//                 }
+//                 console.table(empChoice);
+//                 return empChoice;
+//             },
+//             message: "Please select an employee to remove"
+//         }
+//     ]).then(function (answer) {
+//         var chosenName;
+//         for (var i = 0; i < results.length; i++) {
+//             if (results[i].first_name === answer.choice) {
+//                 chosenName = results[i];
+//             }
+//             console.log(chosenName.title);
+//             connection.query("DELETE * FROM employee WHERE ?", {
+//                 [{
+//                     id: chosenName.id
+//                 }],
+
+//                 function (err) {
+//                     if (err) throw err;
+//                     init();
+//                 }
+//             });
+//         }
+
+//     });
+
+
+
 // update functions
 function updateRole() {
     connection.query("SELECT * FROM employee", function (err, results) {
