@@ -1,0 +1,28 @@
+{
+  "name": "mysql-employee-tracker",
+  "version": "1.0.0",
+  "description": "CMS for managing any and all employees",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "test \\\"Error: no test specified\\\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/92til-infinity/MySQL-Employee-Tracker.git"
+  },
+  "author": "Scott Glover",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/92til-infinity/MySQL-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/92til-infinity/MySQL-Employee-Tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.2.0",
+    "mysql": "^2.18.1"
+  }
+}

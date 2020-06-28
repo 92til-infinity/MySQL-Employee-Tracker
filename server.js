@@ -1,31 +1,40 @@
 const inquirer = require("inquirer");
-const connection = require("./lib/connection.js");
-const Department = require("./lib/Department");
-const Role = require("./lib/Role");
-const Employee = require("./lib/Employee");
-const Table = require("console.table");
 
-const newDepot = new Department();
-const newRole = new Role();
-const newEmployee = new Employee();
+
+const Table = require("console.table");
+const mysql = require("mysql");
+const connection = mysql.createConnection({
+    host: `localhost`,
+    port: 3306,
+    user: `root`,
+    password: `root`,
+    database: `employee_db`
+});
+// Connect / begin
+connection.connect((err) => {
+    if (err) throw err;
+    init();
+});
+
 
 function init() {
     inquirer.prompt({
         name: "action",
-        type: "list",
+        type: "rawlist",
         message: "What would you like to do?",
         choices: [
             "View All Employees",
-            "View All Employees by Department",
+            "View All Departments",
+            "View All Roles",
             // "View All Employees by Manager",
             "Add Employee",
-            "Remove Employee",
+            // "Remove Employee",
             "Add Department",
-            "Remove Department",
+            // "Remove Department",
             "Add Role",
-            "Remove Role",
-            "Update Employee Role",
-            "Update Employee Manager",
+            // "Remove Role",
+            "Update Role",
+            // "Update Employee Manager",
             "Quit"
         ]
     }).then(function (answer) {
@@ -38,7 +47,7 @@ function init() {
                 viewAllDepartment();
                 break;
 
-            case "View All Employees Roles":
+            case "View All Roles":
                 viewAllRole();
                 break;
 
@@ -88,24 +97,27 @@ function init() {
 
 // view all functions
 function viewAllEmployee() {
-    connection.query("SELECT * FROM employee", (err, res) => {
+    connection.query("SELECT * FROM employee", function (err, res) {
         if (err) throw err;
         const table = Table.getTable(res);
         console.log(table);
+        init();
     })
 };
 function viewAllDepartment() {
-    connection.query("SELECT * FROM department", (err, res) => {
+    connection.query("SELECT * FROM department", function (err, res) {
         if (err) throw err;
         const table = Table.getTable(res);
         console.log(table);
+        init();
     })
 };
 function viewAllRole() {
-    connection.query("SELECT * FROM role", (err, res) => {
+    connection.query("SELECT * FROM role", function (err, res) {
         if (err) throw err;
         const table = Table.getTable(res);
         console.log(table);
+        init();
     })
 };
 
@@ -272,7 +284,7 @@ function addEmployee() {
         {
             name: "manager_id",
             type: "input",
-            message: "What is the employee's manager's ID number. if no manager please enter 'N/A'.",
+            message: "What is the employee's manager's ID number. if no manager please enter '0'.",
             default: null
         }
     ]).then(function (answers) {
@@ -306,32 +318,39 @@ function addEmployee() {
                             salary: answers.salary
                         },
 
+                        //         function (err) {
+                        //             if (err) throw err;
+                        //             inquirer.prompt({
+                        //                 name: "department_id",
+                        //                 type: "input",
+                        //                 message: "What is their department ID number.",
+                        //                 default: 1
+                        //             }).then(function (answer) {
+                        //                 connection.query(
+                        //                     "INSERT INTO department SET ?",
+                        //                     {
+                        //                         department_id: answer.department_id || 0
+                        //                     },
+
+                        //                     function (err) {
+                        //                         if (err) throw err;
+                        //                         init();
+                        //                     });
+                        //             });
+                        //         });
+                        // });
                         function (err) {
                             if (err) throw err;
-                            inquirer.prompt({
-                                name: "department_id",
-                                type: "input",
-                                message: "What is their department ID number.",
-                            }).then(function (answer) {
-                                connection.query(
-                                    "INSERT INTO department SET ?",
-                                    {
-                                        department_id: answer.department_id
-                                    },
+                            init();
+                        }
+                    )
 
-                                    function (err) {
-                                        if (err) throw err;
-                                        init();
-                                    });
-                            });
-                        });
                 });
-
             }
-        );
+        )
     });
-
 }
+
 
 function addDepartment() {
     inquirer.prompt({
