@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/92til-infinity/MySQL-Employee-Tracker#readme",
   "dependencies": {
+    "asciiart-logo": "^0.2.6",
     "console.table": "^0.10.0",
+    "i": "^0.3.6",
     "inquirer": "^7.2.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.5"
   }
 }
